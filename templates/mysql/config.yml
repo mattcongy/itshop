@@ -1,0 +1,7 @@
+name: mysql
+description: Mysql Database instance
+version: 0
+category: Database
+maintainer: Matthieu CONGY
+license: MIT
+projectURL:
