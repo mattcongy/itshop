@@ -1,9 +1,13 @@
-version: '2'
-catalog:
-  name: mysql
-  version: 0
-  description: Mysql Database
-  minimum_rancher_version: v0
-  maximum_rancher_version: v1
-  upgrade_from: 0
-  questions: #Used to request user input for configuration options
+.catalog:
+  name: "Mysql"
+  version: "5.10.6"
+  description: "Database"
+  questions:
+    - variable: "context_path"
+      label: "Context path"
+      description: |
+        The context path under which Confluence will be available
+      type: "string"
+      default: "/confluence"
+      required: false
+  
