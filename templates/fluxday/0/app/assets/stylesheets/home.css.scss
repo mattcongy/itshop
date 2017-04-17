@@ -1,0 +1,177 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$link-blue: #759bc0;
+$link-active-bg: #1f2f3e;
+
+.sidebar-links.side-nav{
+  li a{
+    color: $link-blue;
+    font-size: 16px;
+    padding: 3% 10%;
+  }
+  li:hover{
+    a{color: $link-blue;}
+    background: $link-active-bg ;
+  }
+}
+ 
+
+.icon{
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+}
+.icon-dashboard-16{
+  background: url('/assets/iconsprite.png') no-repeat 0px 0px;
+  margin: 0px 10px -2px 0px;
+}
+.icon-tasks-16{
+  margin: 0px 10px -2px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -16px 0px;
+}
+.icon-projects-16{
+  margin: 0px 10px -2px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -32px 0px;
+}
+.icon-teams-16{
+  margin: 0px 10px -2px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -48px 0px;
+}
+.icon-user-16{
+  margin: 0px 10px -2px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -64px 0px;
+}
+.icon-calendar-16{
+  margin: 0px 10px -2px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -80px 0px;
+}
+.icon-reports-16{
+  margin: 0px 10px -2px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -96px 0px;
+}
+.icon-okr-16{
+  margin: 0px 10px -2px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -143px 0px;
+}
+.icon-oauth-16{
+  margin: 0px 10px -2px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -159px 0px;
+}
+.icon-profile-16{
+  margin: 0px 10px -2px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -113px 0px;
+}
+.icon-logout-16{
+  margin: 0px 10px -2px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -128px 0px;
+}
+
+.edit-link{
+  background: url('/assets/iconsprite.png') no-repeat -16px -30px;
+}
+.edit-link:hover{
+  background: url('/assets/iconsprite.png') no-repeat -16px -46px;
+}
+.completion-link{
+  background: url('/assets/iconsprite.png') no-repeat -96px -30px;
+}
+.completed-link{
+  background: url('/assets/iconsprite.png') no-repeat 0px -78px;
+}
+
+.icon-delete{
+  background: url('/assets/iconsprite.png') no-repeat -32px -30px;
+}
+.icon-delete:hover{
+  background: url('/assets/iconsprite.png') no-repeat -32px -46px;
+}
+.settings-link{
+  background: url('/assets/iconsprite.png') no-repeat -127px -80px;
+  margin: 3px;
+}
+.settings-link:hover{
+  background: url('/assets/iconsprite.png') no-repeat -127px -80px;
+}
+.remove-link{
+  background: url('/assets/iconsprite.png') no-repeat -32px -30px;
+  margin: 3px;
+}
+.remove-link:hover{
+  background: url('/assets/iconsprite.png') no-repeat -32px -46px;
+}
+.icon-members-16{
+  margin: 0px 10px -2px 5px;
+  background: url('/assets/iconsprite.png') no-repeat -33px -80px;
+}
+.icon-author{
+  margin: 0px 0px -3px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -192px -80px;
+}
+.icon-assignee{
+  margin: 0px 0px -3px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -207px -80px;
+}
+.icon-timer{
+  margin: 0px 0px -3px 0px;
+  background: url('/assets/iconsprite.png') no-repeat -111px -80px;
+}
+
+.icon.prev{
+  background: url('/assets/iconsprite.png') no-repeat -109px -32px;
+}
+.icon.prev:hover{
+  background: url('/assets/iconsprite.png') no-repeat -109px -48px;
+}
+.icon.next{
+  background: url('/assets/iconsprite.png') no-repeat -122px -32px;
+}
+.icon.verified{
+  background: url('/assets/iconsprite.png') no-repeat 0px -78px;
+}
+.icon.unverified{
+  background: url('/assets/iconsprite.png') no-repeat 0px -46px;
+}
+.icon.next:hover{
+  background: url('/assets/iconsprite.png') no-repeat -122px -48px;
+}
+
+.datepicker{
+  .icon-chevron-left{
+    background: url('/assets/iconsprite.png') no-repeat -112px -32px;
+    width: 14px;
+    height: 16px;
+    display: block;
+  }
+  .icon-chevron-right{
+    background: url('/assets/iconsprite.png') no-repeat -125px -32px;
+    width: 14px;
+    height: 16px;
+    display: block;
+    float: right;
+  }
+}
+
+.next.icon.right,.prev.icon.left{margin: 20px;}
+
+
+.top-bar-section ul li:hover:not(.has-form) > a{
+  background: #9a2e22 !important;
+
+}
+
+.show-for-medium{
+  a:not(.button):hover{background: #9a2e22 !important;}
+  li:hover:not(.has-form) > a{
+    background: #9a2e22 !important;
+  }
+  li a:hover{
+    background: #9a2e22 !important;
+  }
+}
+.user-links{
+  border-top: solid 1px #1f2f3e;
+}
+.top-bar-section ul li > a,.title.back.js-generated{background: #2c3e50;}
+.top-bar-section ul .show-for-small li:hover:not(.has-form) > a,.title.back.js-generated:hover{background: #1f2f3e !important;}

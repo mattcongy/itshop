@@ -1,0 +1,27 @@
+// Place all the styles related to the Teams controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.team-list-item{
+  clear: both;
+  padding: 3% 0;
+  font-size: 1.2em;
+  .team-name{
+    float: left;
+  }
+  .team-glymplse{
+    float: right;
+    margin-left: 10px;
+
+  }
+  .btn.btn-sec{
+    margin-top: -3px;
+    opacity: 0;
+  }
+}
+.team-list-item:hover{
+  .btn-sec{opacity: 1;}
+}
+
+.new-team{
+  margin-top: 10px;
+}

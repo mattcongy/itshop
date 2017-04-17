@@ -1,0 +1,63 @@
+<% unless @users.empty? %>
+    <div class="export-options">
+      <%= link_to "PDF", current_url(:format => :pdf), :target => "_blank" %>
+      <%= link_to "CSV", current_url(:format => :csv), :target => "_blank" %>
+      <%= link_to "Excel", current_url(:format => :xls), :target => "_blank" %> |
+      <%= link_to "Detailed report", current_url(:format => :xls,:detailed=>true), :target => "_blank" %>
+    </div>
+    <div class="report">
+
+      <table class="table sortable-table">
+        <thead>
+        <tr>
+          <th width="3000" class="name">Name</th>
+          <% (@start_date..@end_date).each do |dt| %>
+              <th width="50" class="log">
+                <%= dt.day %>
+              </th>
+              <th class="hidden_class"><%= dt.day %></th>
+          <% end %>
+          <th class="calcd">Average</th>
+          <th class="hidden_class">Average</th>
+          <th class="calcd">Total</th>
+          <th class="hidden_class">Total</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @users.each do |user| %>
+            <tr>
+              <td class="name">
+                <%= user.name %>
+              </td>
+              <% (@start_date..@end_date).each do |dt| %>
+
+                    <% unless @hours[user.id][dt.day].blank? %>
+                      <td class="hidden_class"><%= @hours[user.id][dt.day]['hours'].to_duration.to_s.gsub(":","") %></td>
+                      <td class="log" title='<%= "#{user.name},#{dt.strftime('%d/%m/%y')}" %>'>
+                        <%= link_to @hours[user.id][dt.day]['hours'].to_duration, reports_day_log_path(:date => dt, :user_id => user), :remote => true, :class=>@hours[user.id][dt.day]['delete_request']==true ? 'delete_requested' : '' %>
+                      </td>
+                    <% else %>
+                      <td class="hidden_class">0 </td>
+                      <td class="log" title='<%= "#{user.name},#{dt.strftime('%d/%m/%y')}" %>'>
+                        -
+                      </td>
+                    <% end %>
+              <% end %>
+              <td class="hidden_class"><%= @average[user.id].to_s.gsub(":","") %></td>
+              <td class="calcd"><%= @average[user.id] %></td>
+              <td class="hidden_class"><%= @total[user.id].to_duration.to_s.gsub(":","") %></td>
+              <td class="calcd"><%= @total[user.id].to_duration %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+<% else %>
+    <div class="alert-box secondary">
+      No users to show.
+    </div>
+<% end %>
+<script type="text/javascript">
+    $(".sortable-table").tablesorter();
+</script>

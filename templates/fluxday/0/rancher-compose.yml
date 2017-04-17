@@ -1,0 +1,5 @@
+.catalog:
+  name: "Fluxday"
+  version: "1.0"
+  description: "Open source tool for productivity"
+  questions:

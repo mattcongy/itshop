@@ -1,0 +1,109 @@
+<div class="task-show">
+  <div class="task-details">
+    <div class="bc-div">
+      <ul class="tracker-breadcrumbs">
+        <li><%= link_to project.name, project_path(project) %></li>
+        <li> ></li>
+        <li><%= link_to team.name, project_team_path(project, team) %></li>
+        <li> ></li>
+        <%= link_to "##{task.tracker_id}", task_path(task) %>
+      </ul>
+      <div class="right">
+        <% unless task.status == 'completed' %>
+            <a class="button alert right status" data-options="align:left" data-dropdown="contentDrop-<%= task.id %>">
+              <div class="icon completion-link"></div>
+            </a>
+        <% else %>
+            <a class="right" data-options="align:left" data-dropdown="contentDrop-<%= task.id %>">
+              <div class="icon completed-link"></div>
+            </a>
+        <% end %>
+
+        <% if task.updatable_by_user(current_user) %>
+            <div id="contentDrop-<%= task.id %>" data-dropdown-content class="f-dropdown content small completion-option completion-area drop-task-<%= task.id %>" style="display: block">
+              <%= render :partial => 'tasks/completion', :locals => {:task => task} %>
+            </div>
+        <% end %>
+        <% if can? :edit, task %>
+            <a data-options="align:left" data-dropdown="drop-<%= task.id %>" class="dropdown right">
+              <div class="icon settings-link"></div>
+            </a>
+            <ul id="drop-<%= task.id %>" data-dropdown-content class="f-dropdown">
+              <li>
+                <%= link_to "Edit", edit_task_path(task) %>
+              </li>
+              <li>
+                <%= link_to "Delete", task_path(task), :method => :delete %>
+              </li>
+            </ul>
+        <% end %>
+
+        <div class="date right end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
+          <%= task.time_to_end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-name">
+      <%= task.name %>
+    </div>
+
+    <div class="info">
+      <div class="icon icon-author"></div> Added by
+      <em><%= task.user.name %></em>
+      on
+      <em><%= task.created_at.strftime('%d %B %Y') %></em>
+      <span class="task-priority priority-<%= task.priority %>">
+        Priority: <%= task.priority %>
+      </span>
+    </div>
+
+    <div class="descr">
+      <%= task.description %>
+    </div>
+
+    <div class="info">
+      <div class="icon icon-timer"></div> Start date:
+      <em><%= task.start_date.strftime('%d %B %Y') %>, </em>
+      End date:
+      <em><%= task.end_date.strftime('%d %B %Y') %></em>
+    </div>
+
+
+    <div class="info">
+      <div class="icon icon-assignee"></div> Assigned to
+      <em>
+        <% task.users.each_with_index do |u, i| %>
+            <%= link_to u.name, user_path(u) %>
+            <%= i+1 != task.users.count ? "," : '' %>
+        <% end %>
+      </em>
+    </div>
+  </div>
+
+  <div class="comments-link comments-<%= task.id %>">
+    <% if @comment.present? %>
+        <%= render :partial => 'comments/form' %>
+    <% end %>
+    <%= link_to "#{task.comments_count.to_i} #{'comment'.pluralize(task.comments_count.to_i)}", task_comments_path(task), :remote => true %>
+  </div>
+
+  <% if @sub_tasks.present? %>
+      <% @sub_tasks.each_with_index do |task, i| %>
+          <%= render :partial => 'tasks/sub_task', :locals => {:task => task, :count => i+1} %>
+      <% end %>
+  <% end %>
+  <% unless task.task_id.present? %>
+      <% if can? :manage, task %>
+          <%= link_to 'Add subtask', new_task_path(:task_id => task.id), :class => 'dashed_link transition' %>
+      <% end %>
+  <% end %>
+
+</div>
+
+<script type="text/javascript">
+    $('.task.card').removeClass('active')
+    $('.task-<%= task.id %>').addClass('active')
+    $(window).scrollTop($('#pane3').offset().top)
+    $(document).foundation();
+</script>

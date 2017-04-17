@@ -1,0 +1,38 @@
+<%#= build_validated_select('task', 'user_ids', 'Assignees', 'Should select at least one', '', true, '', @users.map { |x| [x.name, x.id] }) %>
+
+<div class='form-row assignee_key_results assignee-row'>
+  <div class='small-3 columns'>
+    Assignees
+  </div>
+  <div class='small-9 columns'>
+    <div class="task-assignees">
+      <% if @users %>
+          <% @users.each do |u| %>
+              <% unless @key_results[u.id].nil? %>
+                  <div class="user-krs">
+                    <div class="title"><%= u.name %></div>
+                    <% @key_results[u.id].each do |kr| %>
+                        <!--<div class="large-12 columns">-->
+                        <div class='input-set'>
+                          <%= check_box_tag "task[key_result_ids][]", kr.id, @kr_ids.include?(kr.id), :id => "task_key_result_ids_#{kr.id}" %>
+                          <%= label_tag "task[key_result_ids][#{kr.id}]", kr.name %>
+                        </div>
+                        <!--</div>-->
+                    <% end %>
+                  </div>
+              <% end %>
+          <% end %>
+      <% end %>
+      <% if @key_results.empty? %>
+          <script type="text/javascript">
+              $('.alert-area').notify({message: { text: "Selected team and time range does not contain any assignable key results" }, type: 'tracker-alert', fadeOut: { enabled: true, delay: 10000 }}).show();
+          </script>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $('.user-krs input[type=checkbox]').click(function (e) {
+        $(e.currentTarget).siblings('input:checkbox').attr('checked', false)
+    });
+</script>

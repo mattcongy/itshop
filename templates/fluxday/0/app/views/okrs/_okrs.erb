@@ -1,0 +1,32 @@
+<div class="pane2-meta">
+  <div class="large-6 columns">
+    <div class="title">OKR</div>
+  </div>
+  <div class="large-6 columns">
+    <div class="pane-2-selector">
+      <% if current_user.manager? %>
+          <%= select_tag 'okr_user_id', options_for_select(User.active.map { |x| [x.name, x.id] },@user.id) %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="pane2-content">
+  <% if can? :cru, Okr, @user %>
+      <%= link_to 'New OKR', new_user_okr_path(@user), :class => "dashed_link transition" %>
+  <% end %>
+  <% @okrs.each do |okr| %>
+      <%= link_to user_okr_path(@user, okr) do %>
+          <div class="card transition okr-<%= okr.id %>">
+            <div class="title"><%= okr.name %></div>
+            <br/>
+
+            <div class="text"><%= "#{okr.start_date.strftime("%d %B %Y")} - #{okr.end_date.strftime("%d %B %Y")}" %></div>
+          </div>
+      <% end %>
+  <% end %>
+</div>
+<script type="text/javascript">
+    $('#okr_user_id').on('change',function(){
+        window.location = '/users/'+$('#okr_user_id').val()+'/okrs'
+    });
+</script>

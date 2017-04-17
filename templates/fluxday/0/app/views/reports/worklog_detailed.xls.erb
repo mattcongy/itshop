@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <%= @titles.each do |t| %>
+            <Cell>
+              <Data ss:Type="Text"><%= t %></Data>
+            </Cell>
+        <% end %>
+      </Row>
+      <% @users.each do |user| %>
+          <% unless @user_rows[user.id].nil? %>
+              <% (0..(@user_rows[user.id]-1)).each do |i| %>
+                  <Row>
+                    <Cell>
+                      <Data ss:Type="Text"><%= user.name %></Data>
+                    </Cell>
+                    <% (@start_date..@end_date).each do |dt| %>
+                        <% unless @user_logs[user.id][dt.day][i].blank? %>
+                            <Cell>
+                              <% unless @user_logs[user.id][dt.day][i].nil? %>
+                                  <Data ss:Type="Text"><%= "#{@user_logs[user.id][dt.day][i][0]} - #{@user_logs[user.id][dt.day][i][1]}" %></Data>
+                              <% end %>
+                            </Cell>
+                        <% else %>
+                            <Cell><Data ss:Type="Text">-</Data></Cell>
+                        <% end %>
+                    <% end %>
+                  </Row>
+              <% end %>
+              <Row>
+                <Cell>
+                  <Data ss:Type="Text" ss:Bold="1"><%= "#{user.name} - Total" %></Data>
+                </Cell>
+                <% (@start_date..@end_date).each do |dt| %>
+                    <Cell>
+                      <% unless @hours[user.id][dt.day].blank? %>
+                          <Data ss:Type="Text"><%= @hours[user.id][dt.day]["hours"].to_i.to_duration %></Data>
+                      <% end %>
+                    </Cell>
+                <% end %>
+                <Cell>
+                  <Data ss:Type="Text"><%= @average[user.id] %></Data>
+                </Cell>
+                <Cell>
+                  <Data ss:Type="Text"><%= @total[user.id].to_duration %></Data>
+                </Cell>
+              </Row>
+          <% end %>
+      <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Sheet2">
+    <Table>
+      <Row>
+        <%= @titles.each do |t| %>
+            <Cell>
+              <Data ss:Type="Text"><%= t %></Data>
+            </Cell>
+        <% end %>
+      </Row>
+      <% @fields.each do |f| %>
+          <Row>
+            <% f.each do |val| %>
+                <Cell>
+                  <Data ss:Type="Text"><%= val %></Data>
+                </Cell>
+            <% end %>
+          </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

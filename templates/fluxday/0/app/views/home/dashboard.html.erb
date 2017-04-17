@@ -1,0 +1,48 @@
+<%= content_for :pane2 do %>
+    <div class="pane2-meta">
+      <div class="title">Entries</div>
+      <dl class="tabs right" data-tab>
+        <dd class="active clear-tab"><a href="#week">
+          Week
+        </a></dd>
+        <dd class="clear-tab"><a href="#month">
+          Month
+        </a></dd>
+      </dl>
+
+
+    </div>
+    <div class="pane2-content">
+
+      <div class="data-container">
+
+        <!--<dl class="tabs" data-tab>-->
+        <!--<dd class="active"><a href="#panel2-1">-->
+        <!--Week-->
+        <!--</a></dd>-->
+        <!--<dd><a href="#panel2-2">-->
+        <!--Month-->
+        <!--</a></dd>-->
+        <!--</dl>-->
+        <div class="tabs-content">
+          <div class="content active" id="week">
+            <div class="weekdays-container">
+              <%= render :partial => 'calendar/week' %>
+            </div>
+          </div>
+          <div class="content" id="month">
+            <div class="calendar">
+              <div class="month-calendar-field"></div>
+            </div>
+            <div class="work-logs">
+              <%= render :partial => 'work_logs/logs' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+<%= render :partial => 'calendar/day', :locals => {:date => @date, :entries => @entries} %>
+<script type="text/javascript">
+    $(document).foundation();
+</script>

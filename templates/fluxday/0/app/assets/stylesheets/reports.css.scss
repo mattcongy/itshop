@@ -1,0 +1,138 @@
+// Place all the styles related to the reports controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.full-pane{padding: 3%;}
+
+.highcharts-container{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.report-options{
+  .select2-container:hover{
+    border: solid 1px #ccc !important;
+    border-radius: 2px !important;
+  }
+  .select2-container ,input{
+  border: solid 1px #ccc;
+  border-radius: 2px;
+}
+.select2-container{
+  background: #FFFFFF;
+  .select2-choice{height: 30px;}
+}
+}
+
+.worklog-report .report{
+  overflow: auto;
+  max-height: 85%;
+  table{
+    td.log,th.log{min-width: 50px}
+    td.name,th.name{min-width: 200px;}
+    td.calcd,th.calcd{min-width: 100px;}
+  }
+
+}
+.hovered{
+  height:10px;
+  width: 20px;
+  background: gray;
+}
+.report-options{
+  .report-type,.report_options{float: left;}
+  .report-date,.submit_button{float: right;}
+//  .report-type,.report_options,.report-date,.submit_button{margin-right: 1%;}
+  .report-type{width: 20%;}
+  .report_options{width: 40%;margin-left: 3%;}
+  .report-date{
+    .year, .month{width: 48% !important;margin-left: 1%;}
+    width: 25%;
+    input{
+//      float: right;
+      float: left;
+      width: 40%;
+      margin-right: 10%;
+      height: 38px;
+
+    }
+  }
+  .submit_button{
+    width: 7%;
+    button{
+      width: 100%;
+//      padding: 8px 30px;
+      padding: 9px 0px;
+      height: 36px;
+      background: #c0392b;
+      border-radius: 3px;
+    }
+  }
+}
+
+.report-renderer{
+  clear: both;
+}
+
+@media all and (max-width: 640px) {
+  .report-options form{
+    overflow: hidden;
+    .report-type, .report_options .select2-container{
+      margin-bottom: 20px;
+    }
+  }
+.report-type,.report_options,.report-date,.submit_button{
+  overflow: hidden;
+  clear: both !important;
+  width: 100% !important;
+  margin-left: 0px !important;
+  input{
+    width: 100% !important;
+    margin-right: 0px !important;
+  }
+}
+  .report-options .report-date, .report-options .submit_button{
+    float: left;
+  }
+}
+
+@media all and (min-width:991px) and (max-width:1027px){}
+
+.full-pane{
+  padding-top: 110px;
+  h5{color: #333333;font-size: 14px;font-weight: bold;}
+  .main-title{
+    border-bottom: solid 1px #666666;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    width: auto;
+    top: 0px;
+    padding: 20px 20px 10px 40px;
+  }
+
+}
+
+.export-options{
+  text-align: right;
+  clear: both;
+  margin-bottom: 20px;
+}
+.report-select{
+  font-weight: normal;
+}
+a.report-select{
+  margin-left: 20px;
+  color: #333333;
+}
+
+.reveal-modal-bg{
+  z-index: 90;
+}
+.big-text{
+  font-size: 1.4em;
+  line-height: 2em;
+}
+.delete_requested{
+  color: red !important;
+  font-weight: bold;
+}

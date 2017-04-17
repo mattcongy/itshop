@@ -1,0 +1,16 @@
+<div class="main-title">
+  <div class="element">
+    <h5>Reports
+      <a href="#" data-dropdown="drop1" class="report-select">Worklogs  ▾</a>
+      <ul id="drop1" class="f-dropdown report-select" data-dropdown-content>
+        <%= render 'reports/report_types' %>
+      </ul>
+    </h5>
+  </div>
+</div>
+<div class="report-renderer worklog-report">
+  <%= render :partial => 'reports/day_log' %>
+</div>
+<script type="text/javascript">
+
+</script>

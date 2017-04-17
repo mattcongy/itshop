@@ -1,0 +1,10 @@
+<%= content_for :pane2 do %>
+    <%= render :partial => 'oauth_applications/app_index' %>
+<% end %>
+
+<%= content_for :pane3 do %>
+        <%= render :partial => 'oauth_applications/show' %>
+<% end %>
+<script type="text/javascript">
+    window.location = '#pane3'
+</script>

@@ -1,0 +1,50 @@
+<div class="pane3-meta">
+  <div class="title">
+    <div class="left">
+    <%= "Tasks for #{@date.strftime('%A %d %B %Y')}" %>
+    </div>
+    <% if @date <= Date.today && @date >= 5.days.ago %>
+        <%= link_to 'Add log', new_work_log_path(:date=>date), :remote => true, :class => 'btn btn-sec left' %>
+    <% end %>
+  </div>
+  <div class="right">
+    <%= link_to raw("<div class='prev icon'></div>"), calendar_day_path(:date => (@date.to_date-1.days).to_s), :remote => true %>
+    <%= link_to raw("<div class='next icon'></div>"), calendar_day_path(:date => (@date.to_date+1.days).to_s), :remote => true %>
+  </div>
+</div>
+<div class="pane3-content no-padding">
+  <dl class="accordion" data-accordion>
+    <% entries.each_with_index do |entry,i| %>
+        <dd>
+          <a href="#panel<%= i+1 %>" class="collapse-task">
+            <li class="task-name li-priority li-<%= entry.priority.to_s.downcase %>"><%= entry.name %>
+              <div class="right">
+                <%= raw("<div class='icon icon-author'></div>") if entry.user_id == current_user.id %>
+                <%= raw("<div class='icon icon-assignee'></div>") if entry.user_ids.include?(current_user.id) %>
+              </div>
+            </li>
+            <li class="date-sub">
+              <div class="date end-<%= (entry.end_date <= 7.day.from_now && entry.end_date >= Date.today) ? 'soon' : 'low' %>">
+                <%= entry.time_to_end %>
+              </div>
+            </li>
+          </a>
+          <div id="panel<%= i+1 %>" class="content">
+            <%= render :partial=>'tasks/show',:locals=>{:task=>entry,:team => entry.team, :project => entry.project} %>
+          </div>
+        </dd>
+
+
+    <% end %>
+  </dl>
+</div>
+<script type="text/javascript">
+    $('.date-card').removeClass('active')
+    $('.date-<%= date.to_s %>').addClass('active')
+    $(document).foundation({
+        accordion: {
+            callback: function (accordion) {
+            }
+        }
+    });
+</script>

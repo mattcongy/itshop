@@ -1,0 +1,23 @@
+<%= content_for :pane2 do %>
+    <div class="search-results">
+      <div class="pane2-meta">
+        <div class="title">Results for <%= params[:search][:keyword] %></div>
+      </div>
+      <div class="pane2-content scroll2watch">
+
+        <div id="paginator" class="paginator">
+          <%= render 'tasks/task_listings' %>
+        </div>
+
+        <div id="infinite-scrolling" class="scroll-loop">
+          <%= will_paginate @tasks %>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+
+
+<script type="text/javascript">
+        infiniteScroll()
+</script>

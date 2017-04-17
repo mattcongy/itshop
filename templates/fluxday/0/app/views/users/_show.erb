@@ -1,0 +1,79 @@
+<div class="pane3-padding">
+  <div class="head-row user centered">
+
+    <div class="left employee_code">
+      <strong>#<%= @user.employee_code %></strong>
+    </div>
+
+    <div class="right options">
+      <% if can? :edit, @user %>
+          <a href="#" data-options="align:left" data-dropdown="drop1" class="dropdown right">
+            <div class="icon settings-link"></div>
+          </a>
+          <ul id="drop1" data-dropdown-content class="f-dropdown">
+            <li>
+              <%= link_to "Edit", edit_user_path(@user) %>
+            </li>
+            <% if @user == current_user %>
+                <li>
+                  <%= link_to "Change password", change_password_users_path %>
+                </li>
+            <% end %>
+            <% if current_user.manager? %>
+                <li>
+                  <%= link_to "Delete", user_path(user), :method => :delete, :confirm => 'Are you sure you want to archive this employee?' %>
+                </li>
+            <% end %>
+          </ul>
+      <% end %>
+    </div>
+
+    <div class="">
+      <%= image_tag(@user.image.thumbnail, :class => 'rounded_pic centered') %>
+    </div>
+
+
+    <div class="user-title">
+      <div class="name">
+        <%= @user.name %>
+        <div class="nickname">(<%= @user.nickname %>)</div>
+      </div>
+    </div>
+    <div class="email"><a href="mail:<%= @user.email %>"><%= @user.email %></a></div>
+    <div class="email">
+      Reporting managers:
+      <% @managers.each do |manager| %>
+          <%= link_to manager.name, user_path(manager) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="data-container">
+    <dl class="tabs" data-tab>
+      <dd class="active"><a href="#user-teams">
+        Teams
+        <div class="fig"><%= @user.teams.count %></div>
+      </a></dd>
+      <dd><a href="#user-tasks">
+        Pending
+        <div class="fig"><%= @user.tasks.pending.count %></div>
+      </a></dd>
+      <div class="right meta">
+        Reports
+      </div>
+
+    </dl>
+    <div class="tabs-content">
+      <div class="content active" id="user-teams">
+        <%= render :partial => 'teams/team_list', :locals => {:teams => @teams.present? ? @teams : @user.teams} %>
+      </div>
+      <div class="content" id="user-tasks">
+        <%#= render :partial=>'users/user_list',:locals=>{:users=>members.present? ? members : user.members} %>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $('.users.card').removeClass('active')
+    $('.user-<%= @user.id %>').addClass('active')
+</script>

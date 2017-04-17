@@ -1,0 +1,65 @@
+<div class="pane3-padding">
+  <div class="head-row project">
+    <div class="cols">
+      <%= image_tag(project.image.thumbnail) %>
+    </div>
+    <div class="right options">
+      <% if can? :manage, @project %>
+          <a href="#" data-options="align:left" data-dropdown="drop1" class="dropdown right">
+            <div class="icon settings-link"></div>
+          </a>
+          <ul id="drop1" data-dropdown-content class="f-dropdown">
+            <li>
+              <%= link_to "Edit", edit_project_path(@project) %>
+            </li>
+            <li>
+              <%= link_to "Delete", project_path(@project), :method => :delete,:confirm=>'Are you sure you want to archive this department?' %>
+            </li>
+          </ul>
+      <% end %>
+    </div>
+    <div class="title">
+      <div class="main-title"><%= project.name %></div>
+      <div class="main-title-helper">(<%= project.code %>)</div>
+    </div>
+    <div class="website"><%= project.website %></div>
+    <div class="description"><%= project.description %></div>
+  </div>
+
+  <div class="data-container">
+    <dl class="tabs" data-tab>
+      <dd class="active"><a href="#project-teams">
+        Teams
+        <div class="fig"><%= project.team_count %></div>
+      </a></dd>
+      <dd><a href="#project-members">
+        Members
+        <div class="fig"><%= project.member_count %></div>
+      </a></dd>
+      <dd><a href="#project-managers">
+        Managers
+        <div class="fig"><%= project.project_managers.count %></div>
+      </a></dd>
+      <div class="right meta">
+        Added on
+        <div class="fig"><%= project.created_at.strftime('%d %B %Y') %></div>
+      </div>
+
+    </dl>
+    <div class="tabs-content">
+      <div class="content active" id="project-teams">
+        <%= render :partial => 'teams/team_list', :locals => {:project => @project, :teams => @teams.present? ? @teams : @project.teams} %>
+      </div>
+      <div class="content" id="project-members">
+        <%= render :partial => 'users/user_list', :locals => {:users => @members.present? ? @members : @project.members} %>
+      </div>
+      <div class="content" id="project-managers">
+        <%= render :partial => 'users/user_list', :locals => {:users => @managers.present? ? @managers : @project.users} %>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $('.project.card').removeClass('active')
+    $('.prj-<%= project.id %>').addClass('active')
+</script>

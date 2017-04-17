@@ -1,0 +1,8 @@
+$('.task-paginator').append('<%= j render 'tasks/task_page' %>');
+<% if @tasks.next_page %>
+$('#pending .pagination').replaceWith('<%= j will_paginate @tasks %>');
+<% else %>
+$(window).off('scroll');
+$('#pending .pagination').remove();
+<% end %>
+window.location = '#pane2'

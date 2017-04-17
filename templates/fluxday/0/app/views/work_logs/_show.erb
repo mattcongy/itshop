@@ -1,0 +1,43 @@
+<div class="pane3-meta">
+  <div class="title">
+    Log
+  </div>
+
+  <div class="right options">
+    <% if @work_log.user == current_user %>
+        <%= link_to raw("<div class='icon remove-link'></div>"), work_log_path(@work_log), :method => :delete, :confirm => 'Are you sure you want to remove this log?' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="pane3-content work-log-show">
+  <div class="row">
+    <div class="one-row">
+      <div class="small-3 columns">Date</div>
+      <div class="small-9 columns"><%= @work_log.date.strftime('%d %B %Y') %></div>
+    </div>
+    <div class="one-row">
+      <div class="small-3 columns">User</div>
+      <div class="small-9 columns"><%= link_to @work_log.user.name, user_path(@work_log.user_id) %></div>
+    </div>
+    <div class="one-row">
+      <div class="small-3 columns">Time taken</div>
+      <div class="small-9 columns"><%= @work_log.hours %></div>
+    </div>
+    <div class="one-row">
+      <div class="small-3 columns">Task</div>
+      <div class="small-9 columns"><%= link_to @work_log.task.name, task_path(@work_log.task) %></div>
+    </div>
+    <div class="one-row">
+      <div class="small-3 columns">Description</div>
+      <div class="small-9 columns"><%= @work_log.description %></div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    $('.logs .card-transparent').removeClass('active')
+    $('.log-<%= @work_log.id %>').addClass('active')
+    window.location = '#pane3'
+</script>

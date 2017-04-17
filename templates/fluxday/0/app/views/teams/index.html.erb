@@ -1,0 +1,23 @@
+<!--<div class="large-4 columns pane2">-->
+  <%= content_for :pane2 do %>
+  <%# @projects.each do |project| %>
+      <%= render :partial => 'teams/team_index', :locals => {:teams => @teams} %>
+  <%# end %>
+  <% end %>
+
+<!--</div>-->
+<!--<div class="large-6 columns pane3">-->
+  <%# if @project.present? %>
+      <%#= link_to 'New team',new_project_team_path(@project),:remote=>true %>
+  <%# else %>
+      <%#= link_to 'New team',new_team_path(@project),:remote=>true %>
+  <%# end %>
+<%#= content_for :pane3 do %>
+  <% if @project.present? %>
+      <%#= render :partial=>'projects/show',:locals=>{:project=>@project} %>
+  <% end %>
+<%# end %>
+<!--</div>-->
+<script type="text/javascript">
+    window.location = '#pane2'
+</script>

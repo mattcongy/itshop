@@ -1,0 +1,7 @@
+<%= content_for :pane2 do %>
+    <%= render :partial => 'teams/team_index', :locals => {:teams => @teams} %>
+<% end %>
+<%= render 'form' %>
+<script type="text/javascript">
+    window.location = '#pane3'
+</script>
